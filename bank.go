@@ -55,12 +55,9 @@ func main() {
 				fmt.Printf("You withdrew $%.2f\n", withdrawAmount)
 				fmt.Printf("Your new balance is: $%.2f\n", accountBalance)
 			}
-		case 4:
+		default:
 			fmt.Println("Exiting the system. Thank you for using our services!")
 			return
-		default:
-			fmt.Println("Invalid choice. Please try again.")
-
 		}
 
 	}
