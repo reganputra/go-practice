@@ -3,16 +3,27 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 )
 
+const balanceFileName = "account.txt"
+
+func readBalanceFile() float64 {
+	read, _ := os.ReadFile(balanceFileName)
+	balanceText := string(read)
+	convert, _ := strconv.ParseFloat(balanceText, 64)
+
+	return convert
+}
+
 func writeBalanceToFiles(balance float64) {
-	balanceText := fmt.Sprintf("Your current balance is: $%.2f\n", balance)
-	os.WriteFile("balance.txt", []byte(balanceText), 0644)
+	balanceText := fmt.Sprint(balance)
+	os.WriteFile(balanceFileName, []byte(balanceText), 0644)
 }
 
 func main() {
 
-	var accountBalance float64
+	var accountBalance = readBalanceFile()
 
 	fmt.Println("Welcome to the Bank Management System!")
 	for {
@@ -30,10 +41,10 @@ func main() {
 		switch choice {
 		case 1:
 			fmt.Println("Checking balance...")
-			fmt.Printf("Your current balance is: $%.2f\n", accountBalance)
+			fmt.Println(accountBalance)
 		case 2:
 			var depositAmount float64
-			fmt.Print("Enter the amount to deposit: $")
+			fmt.Print("Enter the amount to deposit: ")
 			fmt.Scan(&depositAmount)
 
 			if depositAmount <= 0 {
@@ -43,11 +54,11 @@ func main() {
 
 			fmt.Println("Depositing money...")
 			accountBalance += depositAmount
-			fmt.Printf("Your new balance is: $%.2f\n", accountBalance)
+			fmt.Println(accountBalance)
 			writeBalanceToFiles(accountBalance)
 		case 3:
 			var withdrawAmount float64
-			fmt.Print("Enter the amount to withdraw: $")
+			fmt.Print("Enter the amount to withdraw: ")
 			fmt.Scan(&withdrawAmount)
 
 			if withdrawAmount <= 0 {
@@ -61,8 +72,8 @@ func main() {
 			{
 				fmt.Println("Withdrawing money...")
 				accountBalance -= withdrawAmount
-				fmt.Printf("You withdrew $%.2f\n", withdrawAmount)
-				fmt.Printf("Your new balance is: $%.2f\n", accountBalance)
+				fmt.Println(withdrawAmount)
+				fmt.Println(accountBalance)
 				writeBalanceToFiles(accountBalance)
 			}
 		default:
