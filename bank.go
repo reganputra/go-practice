@@ -6,8 +6,9 @@ func main() {
 
 	var accountBalance float64
 
+	fmt.Println("Welcome to the Bank Management System!")
 	for {
-		fmt.Println("Welcome to the Bank Management System!")
+
 		fmt.Println("What would you like to do today?")
 		fmt.Println("1. Check Balance")
 		fmt.Println("2. Deposit Money")
@@ -29,7 +30,7 @@ func main() {
 
 			if depositAmount <= 0 {
 				fmt.Println("Deposit amount must be greater than 0.")
-				return
+				continue
 			}
 
 			fmt.Println("Depositing money...")
@@ -42,7 +43,7 @@ func main() {
 
 			if withdrawAmount <= 0 {
 				fmt.Println("Withdraw amount must be greater than 0.")
-				return
+				continue
 			}
 
 			if withdrawAmount > accountBalance {
