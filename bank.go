@@ -1,6 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
+
+func writeBalanceToFiles(balance float64) {
+	balanceText := fmt.Sprintf("Your current balance is: $%.2f\n", balance)
+	os.WriteFile("balance.txt", []byte(balanceText), 0644)
+}
 
 func main() {
 
@@ -36,6 +44,7 @@ func main() {
 			fmt.Println("Depositing money...")
 			accountBalance += depositAmount
 			fmt.Printf("Your new balance is: $%.2f\n", accountBalance)
+			writeBalanceToFiles(accountBalance)
 		case 3:
 			var withdrawAmount float64
 			fmt.Print("Enter the amount to withdraw: $")
@@ -54,6 +63,7 @@ func main() {
 				accountBalance -= withdrawAmount
 				fmt.Printf("You withdrew $%.2f\n", withdrawAmount)
 				fmt.Printf("Your new balance is: $%.2f\n", accountBalance)
+				writeBalanceToFiles(accountBalance)
 			}
 		default:
 			fmt.Println("Exiting the system. Thank you for using our services!")
