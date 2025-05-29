@@ -35,6 +35,7 @@ func main() {
 
 	if err != nil {
 		fmt.Println(err)
+		//panic("Please create an account.txt file with a valid balance.")
 	}
 
 	fmt.Println("Welcome to the Bank Management System!")
