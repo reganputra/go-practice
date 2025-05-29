@@ -9,29 +9,32 @@ import (
 
 const balanceFileName = "account.txt"
 
-func readBalanceFile() (float64, error) {
-	read, err := os.ReadFile(balanceFileName)
+func readBalanceFile(filename string) (float64, error) {
+	read, err := os.ReadFile(filename)
 	if err != nil {
 		fmt.Println("Initializing balance to 0.0")
-		return 0.0, errors.New("error reading balance file")
+		return 0.0, errors.New("failed reading balance file")
 	}
-	balanceText := string(read)
-	convert, err := strconv.ParseFloat(balanceText, 64)
+	valueText := string(read)
+	value, err := strconv.ParseFloat(valueText, 64)
 	if err != nil {
 		fmt.Println("Initializing balance to 0.0")
 		return 0.0, errors.New("error converting balance to float")
 	}
-	return convert, nil
+	return value, nil
 }
 
-func writeBalanceToFiles(balance float64) {
-	balanceText := fmt.Sprint(balance)
-	os.WriteFile(balanceFileName, []byte(balanceText), 0644)
+func writeBalanceToFiles(balance float64, filename string) {
+	valueText := fmt.Sprint(balance)
+	err := os.WriteFile(filename, []byte(valueText), 0644)
+	if err != nil {
+		return
+	}
 }
 
 func main() {
 
-	var accountBalance, err = readBalanceFile()
+	var accountBalance, err = readBalanceFile(balanceFileName)
 
 	if err != nil {
 		fmt.Println(err)
@@ -64,7 +67,7 @@ func main() {
 			fmt.Println("Depositing money...")
 			accountBalance += depositAmount
 			fmt.Println(accountBalance)
-			writeBalanceToFiles(accountBalance)
+			writeBalanceToFiles(accountBalance, balanceFileName)
 		case 3:
 			var withdrawAmount float64
 			fmt.Print("Enter the amount to withdraw: ")
@@ -83,7 +86,7 @@ func main() {
 				accountBalance -= withdrawAmount
 				fmt.Println(withdrawAmount)
 				fmt.Println(accountBalance)
-				writeBalanceToFiles(accountBalance)
+				writeBalanceToFiles(accountBalance, balanceFileName)
 			}
 		default:
 			fmt.Println("Exiting the system. Thank you for using our services!")
