@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/Pallinder/go-randomdata"
 	"go-package/fileops"
 )
 
@@ -16,7 +17,7 @@ func main() {
 		//panic("Please create an account.txt file with a valid balance.")
 	}
 
-	fmt.Println("Welcome to the Bank Management System!")
+	fmt.Println("Welcome", randomdata.SillyName())
 	for {
 
 		options()
