@@ -14,5 +14,5 @@ func main() {
 }
 
 func adultAge(age *int) {
-	*age = *age - 18
+	*age = *age - 18 // Dereference the pointer to modify the value
 }
