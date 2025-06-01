@@ -24,9 +24,16 @@ func main() {
 		LastName:  lastName,
 		Birthdate: birthdate,
 		createdAt: time.Now(),
-	}
+	} // struct literal notation
 
-	fmt.Println(firstName, lastName, birthdate)
+	outputDetail(users)
+}
+
+func outputDetail(user User) {
+	fmt.Println("Outputting user details...")
+	fmt.Println("First Name:", user.FirstName)
+	fmt.Println("Last Name:", user.LastName)
+	fmt.Println("Birthdate:", user.Birthdate)
 }
 
 func getUserData(promptText string) string {
