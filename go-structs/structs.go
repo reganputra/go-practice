@@ -27,13 +27,21 @@ func main() {
 	} // struct literal notation
 
 	users.outputDetail()
+	users.remove()
+	users.outputDetail()
 }
 
-func (user User) outputDetail() {
+func (user *User) outputDetail() {
 	fmt.Println("Outputting user details...")
 	fmt.Println("First Name:", user.FirstName)
 	fmt.Println("Last Name:", user.LastName)
 	fmt.Println("Birthdate:", user.Birthdate)
+}
+
+func (user *User) remove() {
+	fmt.Println("Removing user...")
+	user.FirstName = ""
+	user.LastName = ""
 }
 
 func getUserData(promptText string) string {
