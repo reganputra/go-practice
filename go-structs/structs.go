@@ -26,10 +26,10 @@ func main() {
 		createdAt: time.Now(),
 	} // struct literal notation
 
-	outputDetail(users)
+	outputDetail(&users)
 }
 
-func outputDetail(user User) {
+func outputDetail(user *User) {
 	fmt.Println("Outputting user details...")
 	fmt.Println("First Name:", user.FirstName)
 	fmt.Println("Last Name:", user.LastName)
