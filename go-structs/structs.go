@@ -12,19 +12,32 @@ type User struct {
 	createdAt time.Time
 }
 
+// create constructor function to initialize User struct
+
+func NewUser(firstName, lastName, birthdate string) *User {
+	return &User{
+		FirstName: firstName,
+		LastName:  lastName,
+		Birthdate: birthdate,
+		createdAt: time.Now(),
+	}
+}
+
 func main() {
 	firstName := getUserData("Please enter your first name: ")
 	lastName := getUserData("Please enter your last name: ")
 	birthdate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
 
-	var users User
+	var users *User
 
-	users = User{
-		FirstName: firstName,
-		LastName:  lastName,
-		Birthdate: birthdate,
-		createdAt: time.Now(),
-	} // struct literal notation
+	//users = User{
+	//	FirstName: firstName,
+	//	LastName:  lastName,
+	//	Birthdate: birthdate,
+	//	createdAt: time.Now(),
+	//} // struct literal notation
+
+	users = NewUser(firstName, lastName, birthdate) // constructor function
 
 	users.outputDetail()
 	users.remove()
