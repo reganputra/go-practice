@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"time"
 )
@@ -14,13 +15,18 @@ type User struct {
 
 // create constructor function to initialize User struct
 
-func NewUser(firstName, lastName, birthdate string) *User {
+func NewUser(firstName, lastName, birthdate string) (*User, error) {
+
+	if firstName == "" || lastName == "" || birthdate == "" {
+		return nil, errors.New("all fields must be provided")
+	}
+
 	return &User{
 		FirstName: firstName,
 		LastName:  lastName,
 		Birthdate: birthdate,
 		createdAt: time.Now(),
-	}
+	}, nil
 }
 
 func main() {
@@ -37,7 +43,12 @@ func main() {
 	//	createdAt: time.Now(),
 	//} // struct literal notation
 
-	users = NewUser(firstName, lastName, birthdate) // constructor function
+	users, err := NewUser(firstName, lastName, birthdate) // constructor function
+
+	if err != nil {
+		fmt.Println("Error creating user:", err)
+		return
+	}
 
 	users.outputDetail()
 	users.remove()
@@ -60,6 +71,6 @@ func (user *User) remove() {
 func getUserData(promptText string) string {
 	fmt.Print(promptText)
 	var value string
-	fmt.Scan(&value)
+	fmt.Scanln(&value)
 	return value
 }
