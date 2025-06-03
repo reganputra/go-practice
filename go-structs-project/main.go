@@ -15,6 +15,7 @@ func main() {
 		fmt.Println("Error creating note:", err)
 		return
 	}
+	userNote.Display()
 }
 
 func getUserInput(prompt string) string {
