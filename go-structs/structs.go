@@ -26,6 +26,12 @@ func main() {
 		return
 	}
 
+	admin := user.NewAdmin("admin@hsr.com", "password123")
+
+	admin.OutputDetail()
+	admin.Remove()
+	admin.OutputDetail()
+
 	users.OutputDetail()
 	users.Remove()
 	users.OutputDetail()

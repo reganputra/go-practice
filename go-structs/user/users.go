@@ -13,6 +13,12 @@ type User struct {
 	createdAt time.Time
 }
 
+type Admin struct {
+	email    string
+	password string
+	User
+}
+
 // create constructor function to initialize User struct
 
 func NewUser(firstName, lastName, birthdate string) (*User, error) {
@@ -27,6 +33,21 @@ func NewUser(firstName, lastName, birthdate string) (*User, error) {
 		birthdate: birthdate,
 		createdAt: time.Now(),
 	}, nil
+}
+
+// create constructor function to initialize Admin struct
+
+func NewAdmin(email, password string) Admin {
+	return Admin{
+		email:    email,
+		password: password,
+		User: User{
+			firstName: "Admin",
+			lastName:  "Aku",
+			birthdate: "1/1/2000",
+			createdAt: time.Now(),
+		},
+	}
 }
 
 func (user *User) OutputDetail() {
