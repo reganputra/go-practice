@@ -1,8 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"go-structs-project/note"
+	"os"
+	"strings"
 )
 
 func main() {
@@ -18,10 +21,15 @@ func main() {
 }
 
 func getUserInput(prompt string) string {
-	var input string
-	fmt.Println(prompt)
-	fmt.Scan(&input)
-	return input
+	fmt.Printf("%v ", prompt)
+	reader := bufio.NewReader(os.Stdin)
+	text, err := reader.ReadString('\n')
+	if err != nil {
+		return ""
+	}
+	text = strings.TrimPrefix(text, "\n")
+	text = strings.TrimSuffix(text, "\r")
+	return text
 }
 
 func getNoteData() (string, string) {
