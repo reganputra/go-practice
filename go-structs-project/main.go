@@ -18,6 +18,12 @@ func main() {
 		return
 	}
 	userNote.Display()
+	err = userNote.SaveNoteToFle()
+	if err != nil {
+		fmt.Println("Error saving note:", err)
+		return
+	}
+	fmt.Println("Note saved successfully!")
 }
 
 func getUserInput(prompt string) string {
@@ -27,8 +33,7 @@ func getUserInput(prompt string) string {
 	if err != nil {
 		return ""
 	}
-	text = strings.TrimPrefix(text, "\n")
-	text = strings.TrimSuffix(text, "\r")
+	text = strings.TrimSpace(text)
 	return text
 }
 
