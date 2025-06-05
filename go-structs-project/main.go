@@ -19,6 +19,11 @@ type outputter interface {
 }
 
 func main() {
+
+	printAnything("Hello World!")
+	printAnything(1)
+	printAnything(3.14)
+
 	fmt.Println("Welcome to Notes App!")
 	title, content := getNoteData()
 
@@ -75,4 +80,16 @@ func displayOutput(output outputter) error {
 	}
 	fmt.Println("Data displayed and saved successfully!")
 	return nil
+}
+
+func printAnything(any interface{}) {
+	switch any.(type) {
+	case string:
+		fmt.Println("This is String:", any)
+	case int:
+		fmt.Println("This is Integer:", any)
+	case float64:
+		fmt.Println("This is Float:", any)
+	}
+	//fmt.Println(any)
 }
