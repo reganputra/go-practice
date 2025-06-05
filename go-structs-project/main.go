@@ -30,20 +30,17 @@ func main() {
 	}
 
 	newTodo.Display()
-	err = newTodo.Save()
+	err = saveData(newTodo)
 	if err != nil {
-		fmt.Println("Error saving todo:", err)
 		return
 	}
-	fmt.Println("Todo saved successfully!")
 
 	userNote.Display()
-	err = userNote.Save()
+	err = saveData(userNote)
 	if err != nil {
-		fmt.Println("Error saving note:", err)
 		return
 	}
-	fmt.Println("Note saved successfully!")
+
 }
 
 func getUserInput(prompt string) string {
@@ -61,4 +58,18 @@ func getNoteData() (string, string) {
 	titleInput := getUserInput("Enter title: ")
 	contentInput := getUserInput("Enter content: ")
 	return titleInput, contentInput
+}
+
+func saveData(data saver) error {
+	if data == nil {
+		fmt.Println("No data to save.")
+		return nil
+	}
+	err := data.Save()
+	if err != nil {
+		fmt.Println("Error saving data:", err)
+		return err
+	}
+	fmt.Println("Data saved successfully!")
+	return nil
 }
