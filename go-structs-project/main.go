@@ -13,6 +13,11 @@ type saver interface {
 	Save() error
 }
 
+type outputter interface {
+	saver
+	Display()
+}
+
 func main() {
 	fmt.Println("Welcome to Notes App!")
 	title, content := getNoteData()
@@ -29,14 +34,11 @@ func main() {
 		return
 	}
 
-	newTodo.Display()
-	err = saveData(newTodo)
+	err = displayOutput(userNote)
 	if err != nil {
 		return
 	}
-
-	userNote.Display()
-	err = saveData(userNote)
+	err = displayOutput(newTodo)
 	if err != nil {
 		return
 	}
@@ -60,16 +62,17 @@ func getNoteData() (string, string) {
 	return titleInput, contentInput
 }
 
-func saveData(data saver) error {
-	if data == nil {
-		fmt.Println("No data to save.")
+func displayOutput(output outputter) error {
+	if output == nil {
+		fmt.Println("No data to display.")
 		return nil
 	}
-	err := data.Save()
+	output.Display()
+	err := output.Save()
 	if err != nil {
 		fmt.Println("Error saving data:", err)
 		return err
 	}
-	fmt.Println("Data saved successfully!")
+	fmt.Println("Data displayed and saved successfully!")
 	return nil
 }
