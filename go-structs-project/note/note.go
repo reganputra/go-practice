@@ -15,7 +15,7 @@ type Note struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
-func (note *Note) SaveNoteToFle() error {
+func (note *Note) Save() error {
 	fileName := strings.ReplaceAll(note.Title, " ", "_")
 	fileName = strings.ToLower(fileName) + ".json"
 

@@ -4,21 +4,41 @@ import (
 	"bufio"
 	"fmt"
 	"go-structs-project/note"
+	"go-structs-project/todo"
 	"os"
 	"strings"
 )
 
+type saver interface {
+	Save() error
+}
+
 func main() {
 	fmt.Println("Welcome to Notes App!")
 	title, content := getNoteData()
+
+	todoText := getUserInput("Enter todo item (or press Enter to skip): ")
+	newTodo, err := todo.NewTodo(todoText)
+	if err != nil {
+		return
+	}
 
 	userNote, err := note.NewNote(title, content)
 	if err != nil {
 		fmt.Println("Error creating note:", err)
 		return
 	}
+
+	newTodo.Display()
+	err = newTodo.Save()
+	if err != nil {
+		fmt.Println("Error saving todo:", err)
+		return
+	}
+	fmt.Println("Todo saved successfully!")
+
 	userNote.Display()
-	err = userNote.SaveNoteToFle()
+	err = userNote.Save()
 	if err != nil {
 		fmt.Println("Error saving note:", err)
 		return
