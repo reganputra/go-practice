@@ -83,13 +83,16 @@ func displayOutput(output outputter) error {
 }
 
 func printAnything(any interface{}) {
+	floatValue, ok := any.(float64)
+	if ok {
+		fmt.Println("This is Float64:", floatValue)
+		return
+	} // alternative way to extract Type information from value
+
 	switch any.(type) {
 	case string:
 		fmt.Println("This is String:", any)
 	case int:
 		fmt.Println("This is Integer:", any)
-	case float64:
-		fmt.Println("This is Float:", any)
 	}
-	//fmt.Println(any)
 }
