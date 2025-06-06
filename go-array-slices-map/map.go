@@ -8,5 +8,8 @@ func main() {
 		"google":   "https://www.google.com",
 		"facebook": "https://www.facebook.com",
 	}
+
+	webUrl["twitter"] = "https://www.twitter.com"
+	delete(webUrl, "facebook")
 	fmt.Println(webUrl)
 }
