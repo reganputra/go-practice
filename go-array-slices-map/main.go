@@ -13,4 +13,13 @@ func main() {
 	fmt.Println(names)
 	fmt.Println(len(names))
 
+	courses := make(map[string]string, 5)
+
+	courses["Go"] = "Go Programming Language"
+	courses["Python"] = "Python Programming Language"
+	courses["Java"] = "Java Programming Language"
+	courses["JavaScript"] = "JavaScript Programming Language"
+	courses["C++"] = "C++ Programming Language"
+	fmt.Println(len(courses))
+
 }
