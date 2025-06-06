@@ -45,19 +45,19 @@ func main() {
 	fmt.Println("Step 4:", reSlice)
 
 	// Step 5
-	goals := []string{"Learn Go", "Build api with Go"}
+	goals := []string{"Learn Go,", "Build api with Go"}
 	fmt.Println("Step 5:", goals)
 
 	// Step 6
-	goals[1] = "Master Go"
+	goals[1] = "Master Go,"
 	// Adding a third goal
 	goals = append(goals, "Build a web app with Go")
 	fmt.Println("Step 6:", goals)
 
 	// Step 7
 	products := []Product{
-		{1, "Go Programming Book", 29.99},
-		{2, "Go Course", 199.99},
+		{1, "Go Programming Book,", 29.99},
+		{2, "Go Course,", 199.99},
 	}
 	// Adding a third product
 	products = append(products, Product{3, "Go Web Development", 49.99})
