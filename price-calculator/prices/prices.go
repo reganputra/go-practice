@@ -39,7 +39,7 @@ func NewTaxIncludedPriceJob(iom iomanager.IOManager, taxRate float64) *TaxInclud
 	}
 }
 
-func (job *TaxIncludedPriceJob) Process() {
+func (job *TaxIncludedPriceJob) Process(doneChan chan bool) {
 	job.LoadData()
 	result := make(map[string]string)
 
@@ -49,8 +49,6 @@ func (job *TaxIncludedPriceJob) Process() {
 	}
 
 	job.TaxIncludedPrices = result
-	err := job.IOManager.WriteResult(job)
-	if err != nil {
-		return
-	}
+	job.IOManager.WriteResult(job)
+	doneChan <- true
 }
