@@ -34,7 +34,7 @@ func (fm *FileManager) ReadLine() ([]string, error) {
 	return lines, nil
 }
 
-func (fm *FileManager) WriteJson(data interface{}) error {
+func (fm *FileManager) WriteResult(data interface{}) error {
 	file, err := os.Create(fm.OutputFilePath)
 	if err != nil {
 		return errors.New("error creating file")
