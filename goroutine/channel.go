@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func giveResponse(ch chan string) {
+func giveResponse(ch chan string) { // Channel as parameter
 	time.Sleep(1 * time.Second)
 	ch <- "Response from goroutine"
 
