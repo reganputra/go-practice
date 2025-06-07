@@ -28,14 +28,14 @@ func (job *TaxIncludedPriceJob) LoadData() {
 	}
 	if err := scanner.Err(); err != nil {
 		fmt.Println("Error reading file:", err)
-		open.Close()
+		defer open.Close()
 		return
 	}
 
 	prices, err := converter.StringToFloats(lines)
 	if err != nil {
 		fmt.Println("Error converting strings to floats:", err)
-		open.Close()
+		defer open.Close()
 		return
 	}
 	job.InputPrices = prices
