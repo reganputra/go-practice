@@ -19,11 +19,24 @@ func main() {
 		go job.Process(doneChan[i])
 	}
 
-	for _, errChan := range errorChan {
-		errChan <- nil // In a real application, you would handle errors here
+	for i := range taxRates {
+		select {
+		case err := <-errorChan[i]:
+			if err != nil {
+				fmt.Println("Error:", err)
+			}
+		case done := <-doneChan[i]:
+			if done {
+				fmt.Println("Job completed successfully!")
+			}
+		}
 	}
-	for _, done := range doneChan {
-		<-done
-		fmt.Println("Done!")
-	}
+
+	//for _, errChan := range errorChan {
+	//	errChan <- nil // In a real application, you would handle errors here
+	//}
+	//for _, done := range doneChan {
+	//	<-done
+	//	fmt.Println("Done!")
+	//}
 }
