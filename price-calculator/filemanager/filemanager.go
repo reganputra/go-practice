@@ -27,11 +27,10 @@ func (fm *FileManager) ReadLine() ([]string, error) {
 		lines = append(lines, scanner.Text())
 	}
 	if err := scanner.Err(); err != nil {
-		defer open.Close()
+
 		return nil, errors.New("error reading file")
 	}
 
-	defer open.Close()
 	return lines, nil
 }
 
@@ -47,7 +46,6 @@ func (fm *FileManager) WriteResult(data interface{}) error {
 	encoder := json.NewEncoder(file)
 	err = encoder.Encode(data)
 	if err != nil {
-		defer file.Close()
 		return errors.New("error encoding data to JSON")
 	}
 
